@@ -1,28 +1,37 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <v-btn icon>
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
+      <v-toolbar-title class="headline text-uppercase toolbar__title">
+        <span>SOFTWARE</span>
+        <span class="font-weight-light">300</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    </v-app-bar>
+
+    <v-content>
+      <v-card flat class="pa-3 fill-height">
+        <router-view />
+      </v-card>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+  name: 'App',
+  data: () => ({
+    //
+  }),
+};
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+  .toolbar__title {
+    width: 100%;
+    text-align: center;
+  }
 </style>
