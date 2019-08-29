@@ -27,3 +27,10 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Configuration
+make `.env.local`
+
+```
+VUE_APP_API_URL="API URL"
+```
