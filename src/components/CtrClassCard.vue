@@ -1,5 +1,5 @@
 <template>
-  <v-card class="hand__cusor" flat dark>
+  <v-card class="hand__cusor" @click="move" flat dark>
     <v-img
       class="white--text"
       height="200"
@@ -31,5 +31,10 @@ export default {
   },
   data: () => ({
   }),
+  methods: {
+    move () {
+      this.$router.push({ name: 'Course', params: { course: this.item }})
+    }
+  }
 };
 </script>

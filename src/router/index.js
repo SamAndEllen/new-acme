@@ -16,6 +16,11 @@ const router = new Router({
       name: 'Main'
     },
     {
+        path: '/course',
+        component: () => import('@/views/Course'),
+        name: 'Course'
+    },
+    {
       path: '*',
       component: () => import('@/views/Main') // 404
     }

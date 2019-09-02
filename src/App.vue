@@ -1,6 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app
+      dark
+      src="@/assets/toolbar.jpg"
+    >
       <v-btn icon>
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
@@ -13,7 +16,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-card flat class="pa-3 fill-height">
+      <v-card flat class="fill-height">
         <router-view />
       </v-card>
     </v-content>
@@ -25,8 +28,7 @@
 export default {
   name: 'App',
   data: () => ({
-    //
-  }),
+  })
 };
 </script>
 <style scoped>

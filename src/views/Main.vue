@@ -1,6 +1,10 @@
 <template>
   <div>
-    <ctr-class-card v-for="(item, idx) in classes" class="ma-3" :item="item" :key="idx" />
+    <ctr-class-card class="ma-3"
+      v-for="(item, idx) in courses"
+      :item="item" 
+      :key="idx"
+    />
   </div>
 </template>
 
@@ -8,13 +12,15 @@
 import axios from 'axios';
 import CtrClassCard from '@/components/CtrClassCard';
 
+import { mapActions } from 'vuex';
+
 export default {
   name: 'Main',
   components: {
     CtrClassCard
   },
   data: () => ({
-    classes: [
+    courses: [
         {
             image: "https://thenypost.files.wordpress.com/2019/03/tales-from-the-trenches.jpg?quality=90&strip=all&w=1236&h=820&crop=1"
         },
@@ -32,21 +38,26 @@ export default {
         }
     ],
   }),
+  methods: {
+    ...mapActions({
+      setRequireBackNav: 'setRequireBackNav'
+    })
+  },
   async created () {
     await axios
       .get(`${process.env.VUE_APP_API_URL}/courses?page=0`)
       .then(res => {
         const course = res.data._embedded.course;
-        const classArr = [];
-        this.classes.map((data, idx) => {
-            classArr.push({
+        const coursesArr = [];
+        this.courses.map((data, idx) => {
+            coursesArr.push({
                 ...data,
                 ...course[idx],
             })
         });
-        this.classes = classArr;
+        this.courses = coursesArr;
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 };
 </script>
