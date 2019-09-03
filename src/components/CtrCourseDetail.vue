@@ -17,24 +17,23 @@
         </v-card-text>
       </v-card>
       <v-divider class="mx-4"></v-divider>
-        <v-card flat>
-          <v-list disabled dense>
-            <v-list-item-group>
-              <v-list-item
-                v-for="(item, key, i) in detail"
-                :key="i"
-              >
-                <v-list-item-content>
-                  <v-list-item-title>
-                    <span class="mr-4 font-weight-bold">{{ key }}</span>
-                    <span style="color: gray;">{{ item }}</span>
-                  </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-card>
-      <v-divider class="mx-4"></v-divider>
+      <v-card flat>
+        <v-list disabled dense>
+          <v-list-item-group>
+            <v-list-item
+              v-for="(item, key, i) in detail"
+              :key="i"
+            >
+              <v-list-item-content>
+                <v-list-item-title>
+                  <span class="mr-4 font-weight-bold">{{ key }}</span>
+                  <span style="color: gray;">{{ item }}</span>
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-card>
     </v-col>
   </v-row>
 </template>

@@ -1,7 +1,12 @@
 <template>
   <div>
     <ctr-course-detail :course="course" />
-    <ctr-course-list :course="course" />
+    <div class="ma-4">
+      <p class="title mb-1 font-weight-black">
+        Course List
+      </p>
+      <ctr-course-list :course="course" />
+    </div>
   </div>
 </template>
 
