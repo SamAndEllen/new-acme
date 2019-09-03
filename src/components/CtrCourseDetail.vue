@@ -43,7 +43,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'CtrClassDetail',
+  name: 'CtrCourseDetail',
   components: {
   },
   props: {
