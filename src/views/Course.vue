@@ -1,74 +1,75 @@
 <template>
-  <v-row>
-    <v-col cols="12" md="5" class="pt-0 pr-0">
-      <v-img height="200" :src="course.image" />
-    </v-col>
-    <v-col cols="12" md="7" class="pt-0">
-      <v-card flat>
-        <v-card-title>
-          {{ course.title }}
-        </v-card-title>
-        <v-card-text>
-          <p>{{ course.description }}</p>
-          <span class="black--text headline font-weight-black">
-            {{ AddComma(course.unitPrice) }}
-          </span>
-          <span class="subtitle-1">원</span>
-        </v-card-text>
-      </v-card>
-      <v-divider class="mx-4"></v-divider>
-        <v-card max-width="280" flat>
-          <v-list disabled dense>
-            <v-list-item-group>
-              <v-list-item
-                v-for="(item, key, i) in detail"
-                :key="i"
-              >
-                <v-list-item-content>
-                  <v-list-item-title class="font-weight-black" v-text="key"></v-list-item-title>
-                </v-list-item-content>
-                <v-list-item-content>
-                  <v-list-item-title v-text="item"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-card>
-      <v-divider class="mx-4"></v-divider>
-    </v-col>
-  </v-row>
+  <div>
+    <ctr-course-detail :course="course" />
+    <v-list>
+      <v-subheader>General</v-subheader>
+      <v-list-item-group
+        v-model="selected"
+        multiple
+        active-class="pink--text"
+      >
+        <template v-for="(item, index) in items">
+          <v-list-item :key="item.title">
+            <template v-slot:default="{ active, toggle }">
+              <v-list-item-content>
+                <v-list-item-title v-text="item.title"></v-list-item-title>
+                <v-list-item-subtitle class="text--primary" v-text="item.headline"></v-list-item-subtitle>
+                <v-list-item-subtitle v-text="item.subtitle"></v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-list-item-action>
+                <v-list-item-action-text v-text="item.action"></v-list-item-action-text>
+                <v-icon
+                  v-if="!active"
+                  color="grey lighten-1"
+                >
+                  star_border
+                </v-icon>
+
+                <v-icon
+                  v-else
+                  color="yellow"
+                >
+                  star
+                </v-icon>
+              </v-list-item-action>
+            </template>
+          </v-list-item>
+
+          <v-divider></v-divider>
+        </template>
+      </v-list-item-group>
+    </v-list>
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
+import CtrCourseDetail from '@/components/CtrCourseDetail';
 import { mapActions } from 'vuex';
 
 export default {
   name: 'Course',
   components: {
+    CtrCourseDetail
   },
   data: () => ({
-    classes: [
-    ],
     course: null,
-    detail: null,
+    items: [
+      { active: true, title: 'Jason Oner', avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg' },
+      { active: true, title: 'Ranee Carlson', avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg' },
+      { title: 'Cindy Baker', avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg' },
+      { title: 'Ali Connors', avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg' },
+    ]
   }),
   async created () {
     this.course = this.$route.params.course;
-    this.detail = {
-      duration: `${this.course.duration}h`,
-      minimum: this.course.minEnrollment, 
-      maximum: this.course.maxEnrollment
-    };
     this.setRequireBackNav(true)
   },
   methods: {
     ...mapActions({
       setRequireBackNav: 'setRequireBackNav'
     }),
-    AddComma (price) {
-      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
   }
 };
 </script>
