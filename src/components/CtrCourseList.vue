@@ -14,7 +14,6 @@
                   background-color="grey lighten-2"
                   empty-icon="$vuetify.icons.ratingFull"
                   half-increments
-                  small
                   v-if="item.rate > 0"
                 />
               </v-list-item-title>

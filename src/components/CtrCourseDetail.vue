@@ -1,9 +1,9 @@
 <template>
   <v-row>
-    <v-col cols="12" md="5" class="pt-0 pr-0">
+    <v-col cols="12" md="12" class="pt-0 pr-0">
       <v-img height="200" :src="course.image" />
     </v-col>
-    <v-col cols="12" md="7" class="pt-0">
+    <v-col cols="12" md="12" class="pt-0">
       <v-card flat>
         <v-card-title class="font-weight-black">
           {{ course.title }}
