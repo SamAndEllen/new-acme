@@ -30,33 +30,12 @@
 </template>
 
 <script>
-import axios from 'axios';
-import _ from 'lodash';
-
 export default {
   name: 'CtrCourseList',
   props: {
-    course: {
-      type: Object
+    classes: {
+      type: Array
     }
-  },
-  data: () => ({
-    classes: [],
-  }),
-  async created () {
-    await axios
-      .get(this.course._links.clazzList.href)
-      .then(res => {
-        res.data._embedded.clazz.forEach(item => {
-          const id = _.last(_.split(item._links.clazz.href, '/'), 1);
-          this.classes.push({
-            name: `class${id}`,
-            rate: item.evaluationRate,
-            status: item.status
-          })
-        });
-      })
-      .catch(err => console.log(err));
   }
 };
 </script>

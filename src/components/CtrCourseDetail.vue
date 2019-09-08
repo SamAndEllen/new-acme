@@ -51,11 +51,10 @@ export default {
     }
   },
   data: () => ({
-    classes: [
-    ],
+    classes: [],
     detail: null,
   }),
-  async created () {
+  mounted () {
     this.detail = {
       '수강 시간': `${this.course.duration}h`,
       '최소 인원': this.course.minEnrollment, 

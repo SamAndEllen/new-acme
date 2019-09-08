@@ -4,7 +4,7 @@
       dark
       src="@/assets/toolbar.jpg"
     >
-      <v-btn icon>
+      <v-btn v-if="requireBackNav" icon @click="backMove">
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-toolbar-title class="headline text-uppercase toolbar__title">
@@ -24,11 +24,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'App',
-  data: () => ({
-  })
+  computed: {
+    ...mapGetters({
+      requireBackNav: 'requireBackNav',
+    })
+  },
+  methods: {
+    backMove () {
+      this.$router.go(-1);
+    }
+  },
 };
 </script>
 <style scoped>

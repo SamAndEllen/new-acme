@@ -1,14 +1,14 @@
 <template>
   <v-row class="fill-height">
     <v-col cols="12" md="5" class="pt-0 pr-8">
-      <ctr-course-detail :course="course" />
+      <ctr-course-detail v-if="course" :course="course" />
     </v-col>
     <v-col cols="12" md="7" class="pt-0 border__left">
       <div class="ma-4">
         <p class="title mb-1 font-weight-black">
           Course List
         </p>
-        <ctr-course-list :course="course" />
+        <ctr-course-list :classes="classes" />
       </div>
     </v-col>
   </v-row>
@@ -18,7 +18,7 @@
 import axios from 'axios';
 import CtrCourseDetail from '@/components/CtrCourseDetail';
 import CtrCourseList from '@/components/CtrCourseList';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import _ from 'lodash';
 
 export default {
@@ -27,12 +27,45 @@ export default {
     CtrCourseDetail,
     CtrCourseList
   },
+  computed: {
+    ...mapGetters({
+      courseImages: 'courseImages',
+    })
+  },
   data: () => ({
     course: null,
+    classes: [],
   }),
   async created () {
     this.course = this.$route.params.course;
-    // this.setRequireBackNav(true)
+    if (!this.course) {
+      const id = this.$route.query.id;
+      await axios
+      .get(`${process.env.VUE_APP_API_URL}/courses/${id}`)
+      .then(res => {
+        const data = res.data;
+        const image = this.courseImages[id-1].image;
+        this.course = {
+          ...data,
+          image
+        };
+      })
+      .catch(err => console.log(err));
+    }
+    await axios
+      .get(this.course._links.clazzList.href)
+      .then(res => {
+        res.data._embedded.clazz.forEach(item => {
+          const id = _.last(_.split(item._links.clazz.href, '/'), 1);
+          this.classes.push({
+            name: `class${id}`,
+            rate: item.evaluationRate,
+            status: item.status
+          })
+        });
+      })
+      .catch(err => console.log(err));
+    this.setRequireBackNav(true);
   },
   methods: {
     ...mapActions({

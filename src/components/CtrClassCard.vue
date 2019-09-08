@@ -9,7 +9,7 @@
         <v-list-item three-line>
             <v-list-item-content>
                 <v-list-item-title class="headline mb-1">
-                    {{ item.title }}
+                  {{ item.title }}
                 </v-list-item-title>
             </v-list-item-content>
             <v-list-item-icon>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   name: 'CtrClassCard',
   props: {
@@ -33,7 +35,8 @@ export default {
   }),
   methods: {
     move () {
-      this.$router.push({ name: 'Course', params: { course: this.item }})
+      const id = _.last(_.split(this.item._links.course.href, '/'), 1);
+      this.$router.push({ name: 'Course', params: { course: this.item }, query: { id } })
     }
   }
 };
