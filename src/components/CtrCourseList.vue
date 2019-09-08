@@ -15,6 +15,7 @@
                   empty-icon="$vuetify.icons.ratingFull"
                   half-increments
                   v-if="item.rate > 0"
+                  readonly
                 />
               </v-list-item-title>
             </v-list-item-content>

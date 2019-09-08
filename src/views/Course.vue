@@ -1,6 +1,6 @@
 <template>
   <v-row class="fill-height">
-    <v-col cols="12" md="5" class="pt-0 pr-8">
+    <v-col cols="12" md="5" class="pt-0 course__padding">
       <ctr-course-detail v-if="course" :course="course" />
     </v-col>
     <v-col cols="12" md="7" class="pt-0 border__left">
@@ -81,5 +81,13 @@ export default {
   }
   .border__left {
     border-left: #E0E0E0 1px solid;
+  }
+  .course__padding {
+    padding-right: 32px !important;
+  }
+  @media (max-width: 960px) {
+    .course__padding {
+      padding-right: 0px !important;
+    }
   }
 </style>
