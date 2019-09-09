@@ -58,6 +58,7 @@ export default {
         res.data._embedded.clazz.forEach(item => {
           const id = _.last(_.split(item._links.clazz.href, '/'), 1);
           this.classes.push({
+            id,
             name: `class${id}`,
             rate: item.evaluationRate,
             status: item.status

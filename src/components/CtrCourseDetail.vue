@@ -39,8 +39,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'CtrCourseDetail',
   components: {
@@ -51,7 +49,6 @@ export default {
     }
   },
   data: () => ({
-    classes: [],
     detail: null,
   }),
   mounted () {

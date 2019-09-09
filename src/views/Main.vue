@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ctr-class-card class="ma-3"
+    <ctr-course-card class="ma-3"
       v-for="(item, idx) in courses"
       :item="item" 
       :key="idx"
@@ -10,14 +10,14 @@
 
 <script>
 import axios from 'axios';
-import CtrClassCard from '@/components/CtrClassCard';
+import CtrCourseCard from '@/components/CtrCourseCard';
 
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Main',
   components: {
-    CtrClassCard
+    CtrCourseCard
   },
   computed: {
     ...mapGetters({

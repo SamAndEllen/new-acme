@@ -3,7 +3,7 @@
     <v-list-item-group>
       <v-divider></v-divider>
       <template v-for="(item, index) in classes">
-        <v-list-item :key="item.name">
+        <v-list-item :key="item.name" @click="move(item)">
           <template>
             <v-list-item-content>
               <v-list-item-title>
@@ -31,11 +31,18 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'CtrCourseList',
   props: {
     classes: {
       type: Array
+    }
+  },
+  methods: {
+    move (item) {
+      this.$router.push({ name: 'Class', query: { id: item.id } })
     }
   }
 };

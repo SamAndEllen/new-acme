@@ -25,7 +25,7 @@
 import _ from 'lodash';
 
 export default {
-  name: 'CtrClassCard',
+  name: 'CtrCourseCard',
   props: {
     item: {
       type: Object
