@@ -34,7 +34,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'CtrCourseList',
+  name: 'CtrClassList',
   props: {
     classes: {
       type: Array
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     move (item) {
-      this.$router.push({ name: 'Class', query: { id: item.id } })
+      this.$router.push({ name: 'Class', params: { classes: item }, query: { id: item.id } })
     }
   }
 };

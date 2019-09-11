@@ -6,9 +6,9 @@
     <v-col cols="12" md="7" class="pt-0 border__left">
       <div class="ma-4">
         <p class="title mb-1 font-weight-black">
-          Course List
+          Class List
         </p>
-        <ctr-course-list :classes="classes" />
+        <ctr-class-list :classes="classes" />
       </div>
     </v-col>
   </v-row>
@@ -17,7 +17,7 @@
 <script>
 import axios from 'axios';
 import CtrCourseDetail from '@/components/CtrCourseDetail';
-import CtrCourseList from '@/components/CtrCourseList';
+import CtrClassList from '@/components/CtrClassList';
 import { mapActions, mapGetters } from 'vuex';
 import _ from 'lodash';
 
@@ -25,7 +25,7 @@ export default {
   name: 'Course',
   components: {
     CtrCourseDetail,
-    CtrCourseList
+    CtrClassList
   },
   computed: {
     ...mapGetters({

@@ -1,7 +1,15 @@
 <template>
-  <v-row class="fill-height">
-    <v-col cols="12" class="pt-0">
-      <ctr-class-day-list class="ma-3" :days="days" />
+  <v-row>
+    <v-col cols="12" md="5" class="pt-0">
+      <ctr-class-detail :classes="classes" class="mb-3" />
+    </v-col>
+    <v-col cols="12" md="7" class="pt-0 border__left">
+      <div class="ma-4">
+        <p class="title mb-1 font-weight-black">
+          Class Day List
+        </p>
+        <ctr-class-day-list :days="days" />
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -9,15 +17,18 @@
 <script>
 import axios from 'axios';
 import { mapActions } from 'vuex';
+import CtrClassDetail from '@/components/CtrClassDetail';
 import CtrClassDayList from '@/components/CtrClassDayList';
 
 export default {
   name: 'Class',
   components: {
+    CtrClassDetail,
     CtrClassDayList
   },
   data: () => ({
-    days: []
+    days: [],
+    classes: null
   }),
   methods: {
     ...mapActions({
@@ -25,7 +36,20 @@ export default {
     })
   },
   async created () {
+    this.classes = this.$route.params.classes;
     const id = this.$route.query.id;
+    if (!this.classes) {
+      await axios
+      .get(`${process.env.VUE_APP_API_URL}/clazzs/${id}`)
+      .then(res => {
+        const classId = _.last(_.split(res.data._links.clazz.href, '/'), 1);
+        this.classes = {
+          name: `class${classId}`,
+          ...res.data
+        };
+      })
+      .catch(err => console.log(err));
+    }
     await axios
       .get(`${process.env.VUE_APP_API_URL}/clazzs/${id}/classDayList`)
       .then(res => {
@@ -40,5 +64,8 @@ export default {
 <style>
   .hand__cusor {
     cursor: pointer;
+  }
+  .border__left {
+    border-left: #E0E0E0 1px solid;
   }
 </style>
