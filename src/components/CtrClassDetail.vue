@@ -38,14 +38,5 @@ export default {
   },
   data: () => ({
   }),
-  methods: {
-    getDate (day, type) {
-      if (type === 'day') return this.$moment(day).format('YYYY-MM-DD');
-      else return this.$moment(day).format('H:mm:ss');
-    },
-    AddComma (price) {
-      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
-  }
 };
 </script>

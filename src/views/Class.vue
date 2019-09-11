@@ -1,17 +1,24 @@
 <template>
-  <v-row>
-    <v-col cols="12" md="5" class="pt-0">
-      <ctr-class-detail :classes="classes" class="mb-3" />
-    </v-col>
-    <v-col cols="12" md="7" class="pt-0 border__left">
-      <div class="ma-4">
-        <p class="title mb-1 font-weight-black">
-          Class Day List
-        </p>
-        <ctr-class-day-list :days="days" />
-      </div>
-    </v-col>
-  </v-row>
+  <div>
+    <v-row>
+      <v-col cols="12" md="5" class="pt-0">
+        <ctr-class-detail v-if="classes" :classes="classes" class="mb-3" />
+      </v-col>
+      <v-col cols="12" md="7" class="pt-0 border__left">
+        <div class="ma-4">
+          <p class="title mb-1 font-weight-black">
+            Class Day List
+          </p>
+          <ctr-class-day-list :days="days" />
+        </div>
+      </v-col>
+    </v-row>
+    <v-footer fixed color="white">
+      <v-btn color="primary" dark block>
+        Open Usage
+      </v-btn>
+    </v-footer>
+  </div>
 </template>
 
 <script>
@@ -45,6 +52,7 @@ export default {
         const classId = _.last(_.split(res.data._links.clazz.href, '/'), 1);
         this.classes = {
           name: `class${classId}`,
+          rate: res.data.evaluationRate,
           ...res.data
         };
       })
