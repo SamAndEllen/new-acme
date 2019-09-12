@@ -6,7 +6,7 @@
         <template>
           <v-list-item-content>
             <v-row>
-              <v-col cols="4" class="primary--text headline font-weight-black">{{ item.number }}Days</v-col>
+              <v-col cols="4" class="primary--text headline font-weight-black">{{ item.name }}</v-col>
               <v-col cols="8" class="black--text title font-weight-black">
                 <span class="black--text title font-weight-black">
                   {{ AddComma(item.instructorPay) }}

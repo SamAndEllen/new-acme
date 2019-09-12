@@ -13,10 +13,8 @@
         </div>
       </v-col>
     </v-row>
-    <v-footer fixed color="white mb-2">
-      <v-btn color="primary" dark block>
-        Open Usage
-      </v-btn>
+    <v-footer fixed color="white ma-2">
+      <ctr-select-area :days="days" />
     </v-footer>
   </div>
 </template>
@@ -26,22 +24,19 @@ import axios from 'axios';
 import { mapActions } from 'vuex';
 import CtrClassDetail from '@/components/CtrClassDetail';
 import CtrClassDayList from '@/components/CtrClassDayList';
+import CtrSelectArea from '@/components/CtrSelectArea';
 
 export default {
   name: 'Class',
   components: {
     CtrClassDetail,
-    CtrClassDayList
+    CtrClassDayList,
+    CtrSelectArea
   },
   data: () => ({
     days: [],
     classes: null
   }),
-  methods: {
-    ...mapActions({
-      setRequireBackNav: 'setRequireBackNav'
-    })
-  },
   async created () {
     this.classes = this.$route.params.classes;
     const id = this.$route.query.id;
@@ -61,10 +56,21 @@ export default {
     await axios
       .get(`${process.env.VUE_APP_API_URL}/clazzs/${id}/classDayList`)
       .then(res => {
-        this.days = res.data._embedded.classday;
+        this.days = res.data._embedded.classday.map(res => {
+          return {
+            id: _.last(_.split(res._links.classDay.href, '/'), 1),
+            name: `${res.number}Days`,
+            ...res
+          }
+        });
       })
       .catch(err => console.log(err));
     this.setRequireBackNav(true);
+  },
+  methods: {
+    ...mapActions({
+      setRequireBackNav: 'setRequireBackNav'
+    })
   }
 };
 </script>
