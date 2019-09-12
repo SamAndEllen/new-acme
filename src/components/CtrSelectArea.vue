@@ -1,8 +1,8 @@
 <template>
   <v-bottom-sheet v-model="sheet">
     <template v-slot:activator="{ on }">
-      <v-btn color="primary mb-2" block dark @click="openSheet">
-        Open Usage
+      <v-btn color="primary" block dark @click="openSheet">
+        배정하기
       </v-btn>
     </template>
     <v-sheet class="text-center input__box">

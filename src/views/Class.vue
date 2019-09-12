@@ -13,7 +13,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-footer fixed color="white ma-2">
+    <v-footer fixed color="white mb-2 mr-2">
       <ctr-select-area :days="days" />
     </v-footer>
   </div>
