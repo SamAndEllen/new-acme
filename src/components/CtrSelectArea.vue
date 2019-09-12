@@ -31,8 +31,8 @@
           solo
           label="Select Instructor"
         />
-        <v-btn color="primary mb-2" block dark>
-            배정하기
+        <v-btn color="primary mb-2" block dark @click="onSubmit()">
+          배정하기
         </v-btn>
       </div>
     </v-sheet>
@@ -52,9 +52,9 @@ export default {
   data: () => ({
     sheet: false,
     select: {
-        day: null,
-        venu: null,
-        instructor: null
+      day: null,
+      venu: null,
+      instructor: null
     },
     venus: null,
     instructors: null,
@@ -89,6 +89,35 @@ export default {
         .catch(err => console.log(err));
       }
       this.sheet = true;
+    },
+    async onSubmit() {
+      const classDayId = Number(this.select.day);
+      const venuId = Number(this.select.venu);
+      const instructorId = Number(this.select.instructor);
+      await axios
+      .post(`${process.env.VUE_APP_API_URL}/schedule-service/associate-venu`, {
+        classDayId,
+        venuId
+      })
+      .then(async () => {
+        await axios
+        .post(`${process.env.VUE_APP_API_URL}/schedule-service/associate-instructor`, {
+          classDayId,
+          instructorId
+        })
+        .then(() => {
+          alert("배정 완료");
+          this.sheet = false;
+        })
+        .catch(error => {
+          alert("강사 선택 오류");
+          console.log(error);
+        });
+      })
+      .catch(error => {
+        alert("강의장 선택 오류");
+        console.log(error);
+      });
     }
   }
 }
@@ -98,6 +127,7 @@ export default {
   .input__box {
     border-radius: 0;
     padding: 1rem;
+    padding-right: 1.65rem;
   }
   .v-text-field__details {
     display: none;
