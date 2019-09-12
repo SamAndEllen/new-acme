@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" md="5" class="pt-0">
+      <v-col cols="12" class="pt-0">
         <ctr-class-detail v-if="classes" :classes="classes" class="mb-3" />
       </v-col>
-      <v-col cols="12" md="7" class="pt-0 border__left">
+      <v-col cols="12" class="pt-0">
         <div class="ma-4">
           <p class="title mb-1 font-weight-black">
             Class Day List
@@ -13,7 +13,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-footer fixed color="white">
+    <v-footer fixed color="white mb-2">
       <v-btn color="primary" dark block>
         Open Usage
       </v-btn>
@@ -72,8 +72,5 @@ export default {
 <style>
   .hand__cusor {
     cursor: pointer;
-  }
-  .border__left {
-    border-left: #E0E0E0 1px solid;
   }
 </style>

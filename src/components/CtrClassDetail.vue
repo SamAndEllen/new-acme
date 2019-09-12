@@ -3,7 +3,7 @@
     <v-list-item>
         <template>
           <v-list-item-content>
-            <p class="title mb-1 font-weight-black">
+            <p class="headline mb-1 font-weight-black">
               {{ classes.name }}
             </p>
             <v-list-item-title>
